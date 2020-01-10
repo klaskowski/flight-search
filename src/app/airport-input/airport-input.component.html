@@ -1,0 +1,25 @@
+<div class="from-editor">
+    <input
+        type="text"
+        placeholder="{{placeholder}}"
+        [(ngModel)]="value"
+        (ngModelChange)="onFromChange($event)"
+        (focus)="isFocused = true"
+        (blur)="isFocused = false"
+        (keyup.arrowup)="previousSuggestion()"
+        (keyup.arrowdown)="nextSuggestion()"
+        (keyup.enter)="selectSuggestion()"
+        />
+    <ul *ngIf="value.length >= 3 && isFocused">
+        <li
+        *ngFor="let s of suggestions"
+        class="suggestionList"
+        [class.selected]="selected == s"
+        (mouseenter)="onMouseEnter(s)"
+        (mouseleave)="onMouseLeave(s)">
+        <p>{{s.airport}}</p>
+        <p>{{s.code.toUpperCase()}}</p>
+        <p>{{s.country}}</p>
+        </li>
+    </ul>
+</div>
